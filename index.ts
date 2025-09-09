@@ -1,25 +1,29 @@
 import express from "express";
+import { fileURLToPath } from "node:url";
+import path, { dirname } from "node:path";
 import { Router } from "express";
-import type { Request, Response } from "express";
+import {
+  getUsername,
+  createUsernameGet,
+  createUsernamePost,
+} from "./controller.ts";
 
 const app = express();
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
+app.set("views", path.join(__dirname, "../views"));
 app.set("view engine", "ejs");
 app.use(express.urlencoded({ extended: true }));
 
 const home = Router();
-home.get('/', function (req: Request, res: Response) {
-    console.log("usernames will be logged here - wip");
-});
-home.get('/new', function (req: Request, res: Response) {
-    res.render('home');
-});
-home.post('/new', function (req: Request, res: Response) {
-    console.log("username to be saved: ", req.body.username);
-});
+home.get("/", getUsername);
+home.get("/new", createUsernameGet);
+home.post("/new", createUsernamePost);
 
-app.use('/', home);
+app.use("/", home);
 
 const PORT = process.env.PORT || 8000;
 app.listen(PORT, () => {
-    console.log(`now listening on ${PORT}`);
+  console.log(`now listening on ${PORT}`);
 });

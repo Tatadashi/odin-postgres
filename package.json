@@ -8,7 +8,8 @@
     "prestart": "npm run build",
     "start": "node dist/index.js",
     "preserve": "npm run build",
-    "serve": "concurrently \"npx tsc -w\" \"nodemon dist/index.js\""
+    "serve": "concurrently \"npx tsc -w\" \"nodemon dist/index.js\"",
+    "populate": "node dist/db/populatedb.js"
   },
   "repository": {
     "type": "git",
@@ -21,13 +22,16 @@
   "devDependencies": {
     "@types/express": "^5.0.3",
     "@types/node": "^24.3.0",
+    "@types/pg": "^8.15.5",
     "concurrently": "^9.2.1",
+    "dotenv": "^17.2.2",
     "nodemon": "^3.1.10",
     "rimraf": "^6.0.1",
     "typescript": "^5.9.2"
   },
   "dependencies": {
     "ejs": "^3.1.10",
-    "express": "^5.1.0"
+    "express": "^5.1.0",
+    "pg": "^8.16.3"
   }
 }

@@ -1,21 +1,20 @@
 import express from "express";
+import { fileURLToPath } from "node:url";
+import path, { dirname } from "node:path";
 import { Router } from "express";
+import { getUsername, createUsernameGet, createUsernamePost, } from "./controller.js";
 const app = express();
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+app.set("views", path.join(__dirname, "../views"));
 app.set("view engine", "ejs");
 app.use(express.urlencoded({ extended: true }));
 const home = Router();
-home.get('/', function (req, res) {
-    console.log("usernames will be logged here - wip");
-});
-home.get('/new', function (req, res) {
-    res.render('home');
-});
-home.post('/new', function (req, res) {
-    console.log("username to be saved: ", req.body.username);
-});
-app.use('/', home);
+home.get("/", getUsername);
+home.get("/new", createUsernameGet);
+home.post("/new", createUsernamePost);
+app.use("/", home);
 const PORT = process.env.PORT || 8000;
 app.listen(PORT, () => {
     console.log(`now listening on ${PORT}`);
 });
-//# sourceMappingURL=index.js.map

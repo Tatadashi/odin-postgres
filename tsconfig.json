@@ -3,11 +3,11 @@
     "module": "nodenext",
     "moduleResolution": "nodenext",
     "target": "esnext",
-    "sourceMap": true,
+    "sourceMap": false,
     "outDir": "dist",
     "rewriteRelativeImportExtensions": true,
     "erasableSyntaxOnly": true,
     "verbatimModuleSyntax": true,
     "strict": true
-  },
+  }
 }
