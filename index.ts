@@ -3,12 +3,11 @@ import { fileURLToPath } from "node:url";
 import path, { dirname } from "node:path";
 import { Router } from "express";
 import {
-  getUsername,
   createUsernameGet,
   createUsernamePost,
-  getUsernameSearch
+  getUsernameSearch,
+  deleteUsernamesGet,
 } from "./controller.ts";
-//search(sql) and delete
 
 const app = express();
 const __filename = fileURLToPath(import.meta.url);
@@ -22,6 +21,7 @@ const home = Router();
 home.get("/", getUsernameSearch);
 home.get("/new", createUsernameGet);
 home.post("/new", createUsernamePost);
+home.get("/delete", deleteUsernamesGet);
 
 app.use("/", home);
 

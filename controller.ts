@@ -1,4 +1,9 @@
-import { getAllUsername, insertUsername, searchUsernameContain } from "./db/queries.ts";
+import {
+  getAllUsername,
+  insertUsername,
+  searchUsernameContain,
+  deleteUsernames,
+} from "./db/queries.ts";
 import type { Request, Response } from "express";
 
 export async function getUsername(req: Request, res: Response) {
@@ -11,11 +16,13 @@ export async function getUsernameSearch(req: Request, res: Response) {
   if (searchQuery) {
     let queryStr = String(searchQuery);
     const searchedNames = await searchUsernameContain(queryStr);
-    res.send('Usernames: ' + searchedNames.map((user) => user.username).join(', '));
+    res.send(
+      "Usernames: " + searchedNames.map((user) => user.username).join(", ")
+    );
   } else {
     getUsername(req, res);
   }
-};
+}
 
 export async function createUsernameGet(req: Request, res: Response) {
   res.render("home");
@@ -27,3 +34,7 @@ export async function createUsernamePost(req: Request, res: Response) {
   res.redirect("/");
 }
 
+export async function deleteUsernamesGet(req: Request, res: Response) {
+  await deleteUsernames();
+  res.redirect("/");
+}

@@ -10,6 +10,12 @@ export async function insertUsername(username: string) {
 }
 
 export async function searchUsernameContain(queryStr: string) {
-  const { rows } = await pool.query(`SELECT * FROM usernames WHERE LOWER(username) LIKE '%${queryStr}%'`);
+  const { rows } = await pool.query(
+    `SELECT * FROM usernames WHERE LOWER(username) LIKE '%${queryStr}%'`
+  );
   return rows;
-};
+}
+
+export async function deleteUsernames() {
+  await pool.query("DELETE FROM usernames");
+}

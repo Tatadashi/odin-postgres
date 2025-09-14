@@ -2,8 +2,7 @@ import express from "express";
 import { fileURLToPath } from "node:url";
 import path, { dirname } from "node:path";
 import { Router } from "express";
-import { getUsername, createUsernameGet, createUsernamePost, getUsernameSearch } from "./controller.js";
-//search(sql) and delete
+import { createUsernameGet, createUsernamePost, getUsernameSearch, deleteUsernamesGet, } from "./controller.js";
 const app = express();
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -14,6 +13,7 @@ const home = Router();
 home.get("/", getUsernameSearch);
 home.get("/new", createUsernameGet);
 home.post("/new", createUsernamePost);
+home.get("/delete", deleteUsernamesGet);
 app.use("/", home);
 const PORT = process.env.PORT || 8000;
 app.listen(PORT, () => {
