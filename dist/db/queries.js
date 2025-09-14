@@ -6,3 +6,8 @@ export async function getAllUsername() {
 export async function insertUsername(username) {
     await pool.query("INSERT INTO usernames (username) VALUES ($1)", [username]);
 }
+export async function searchUsernameContain(queryStr) {
+    const { rows } = await pool.query(`SELECT * FROM usernames WHERE LOWER(username) LIKE '%${queryStr}%'`);
+    return rows;
+}
+;

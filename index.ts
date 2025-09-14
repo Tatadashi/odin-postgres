@@ -6,7 +6,9 @@ import {
   getUsername,
   createUsernameGet,
   createUsernamePost,
+  getUsernameSearch
 } from "./controller.ts";
+//search(sql) and delete
 
 const app = express();
 const __filename = fileURLToPath(import.meta.url);
@@ -17,7 +19,7 @@ app.set("view engine", "ejs");
 app.use(express.urlencoded({ extended: true }));
 
 const home = Router();
-home.get("/", getUsername);
+home.get("/", getUsernameSearch);
 home.get("/new", createUsernameGet);
 home.post("/new", createUsernamePost);
 
